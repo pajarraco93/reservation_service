@@ -11,7 +11,12 @@ export const findAvailableTableUsecase = ({
   tableRepository
 }: CreateReservationUsecaseProps): FindAvailableTableUsecase => {
   const execute = async (input: FindAvailableTableUsecaseInput): Promise<Table | null> => {
-    return tableRepository.getTables().find((table) => table.capacity >= input.partySize) || null;
+    const { partySize, occupiedTableIds } = input;
+    const tables = tableRepository
+      .getTables()
+      .filter((table) => !occupiedTableIds.includes(table.id));
+
+    return tables.find((table) => table.capacity >= partySize) || null;
   };
 
   return { execute };

@@ -1,6 +1,7 @@
 import { Table } from '@domain/table/model';
 
 export interface FindAvailableTableUsecaseInput {
+  occupiedTableIds: string[];
   partySize: number;
 }
 

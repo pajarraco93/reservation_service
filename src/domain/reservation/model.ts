@@ -2,7 +2,7 @@ import { Table } from '../table/model';
 
 export enum ReservationStatus {
   RESERVED = 'reserved',
-  WAITING = 'wating',
+  WAITING = 'waiting',
   CANCELLED = 'canceller'
 }
 
@@ -11,7 +11,8 @@ export interface Reservation {
   customerName: string;
   customerEmail: string;
   partySize: number;
-  date: Date;
+  startsAt: Date;
+  endsAt: Date;
   table?: Table;
   status: ReservationStatus;
 }

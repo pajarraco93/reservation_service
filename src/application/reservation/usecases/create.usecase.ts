@@ -2,14 +2,16 @@ import { Reservation, ReservationStatus } from '@domain/reservation/model';
 import { ReservationRepository } from '@domain/reservation/repository.port';
 import { v4 as uuidv4 } from 'uuid';
 
+import { FindAvailableTableUsecase } from '../table/findAvailable.port';
 
 import { CreateReservationUsecase, CreateReservationUsecaseInput } from './create.port';
-import { FindAvailableTableUsecase } from '../table/findAvailable.port';
 
 export interface CreateReservationUsecaseProps {
   findAvailableTableUsecase: FindAvailableTableUsecase;
   reservationRepository: ReservationRepository;
 }
+
+export const RESERVATION_DURATION = 45 * 60 * 1000;
 
 export const createReservationUsecase = ({
   findAvailableTableUsecase,
@@ -18,7 +20,10 @@ export const createReservationUsecase = ({
   const execute = async (input: CreateReservationUsecaseInput): Promise<Reservation> => {
     const { partySize, customerName, customerEmail, datetime } = input;
 
+    const reservationEndsAt = new Date(datetime.getTime() + RESERVATION_DURATION);
+    const reservations = reservationRepository.getReservationsInTime(datetime, reservationEndsAt);
     const table = await findAvailableTableUsecase.execute({
+      occupiedTableIds: reservations.map((reservation) => reservation.table!.id),
       partySize
     });
 
@@ -27,7 +32,8 @@ export const createReservationUsecase = ({
       customerName,
       customerEmail,
       partySize,
-      date: datetime,
+      startsAt: datetime,
+      endsAt: reservationEndsAt,
       table: table ? table : undefined,
       status: table ? ReservationStatus.RESERVED : ReservationStatus.WAITING
     };

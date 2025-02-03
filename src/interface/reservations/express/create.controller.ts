@@ -3,10 +3,18 @@ import { container } from '@infra/shared/dependecyContainer';
 import { Request, Response } from 'express';
 
 export const createReservationController = async (req: Request, res: Response): Promise<void> => {
-  const inputParams = req.body as CreateReservationUsecaseInput;
-  const reservation = await container.usecases.createReservation.execute(inputParams);
+  try {
+    const inputParams = req.body as CreateReservationUsecaseInput;
 
-  console.log("Reservation with values: ", reservation);
+    if (typeof inputParams.datetime === 'string') {
+      inputParams.datetime = new Date(inputParams.datetime);
+    }
 
-  res.status(201).send('Reservation created');
+    const reservation = await container.usecases.createReservation.execute(inputParams);
+
+    res.status(201).json({ reservation });
+  } catch (error) {
+    console.error('Error creating reservation:', error);
+    res.status(400).json({ error: 'Invalid request' });
+  }
 };
