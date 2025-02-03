@@ -7,6 +7,8 @@ const createServer = (port: string | number) => {
   const application = express();
   let server: Server | null = null;
 
+  application.use(express.json());
+
   application.use('/reservation', reservationRouter);
 
   const close = (): Promise<void> => {
