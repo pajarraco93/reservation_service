@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "simple-import-sort"],
+    "rules": {
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    ["^@?\\w"],
+                    ["^(api|assets|common|components|locales|mocks|pages|src|services|state|styles|types)(/.*|$)"],
+                    ["^\\u0000"],
+                    ["^\\.\\.(?!/?$)","^\\.\\./?$"],
+                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                ]
+            }
+        ],
+        "simple-import-sort/exports": "error",
+        "no-console": "warn",
+        "curly": "error"
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "reservation_service",
+  "version": "1.0.0",
+  "description": "Reservation Service",
+  "main": "dist/main.ts",
+  "scripts": {
+    "dev": "ts-node src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "lint": "npm run prettier && npm run lint:check",
+    "prettier": "prettier --check ./src",
+    "code:fix": "eslint . --fix && prettier --write ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pajarraco93/reservation_service.git"
+  },
+  "author": "Javier Soria",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@application": "dist/application",
+    "@domain": "dist/domain",
+    "@infra": "dist/infra",
+    "@interface": "dist/interface",
+    "@shared": "dist/shared"
+  }
+}
