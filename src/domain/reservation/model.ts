@@ -1,9 +1,10 @@
-import { Table } from "../table/model";
+import { Table } from '../table/model';
 
 export interface Reservation {
   id: string;
   customerName: string;
-  customerEmail:string;
+  customerEmail: string;
   partySize: number;
-  table: Table;
-};
+  table?: Table;
+  createdAt: Date;
+}

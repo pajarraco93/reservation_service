@@ -9,7 +9,11 @@
     "start": "node dist/main.js",
     "lint": "npm run prettier && npm run lint:check",
     "prettier": "prettier --check ./src",
-    "code:fix": "eslint . --fix && prettier --write ./src"
+    "code:fix": "eslint . --fix && prettier --write ./src",
+    "typeorm": "node -r module-alias/register ./node_modules/typeorm/cli.js -d ./dist/infra/shared/typeorm/dataSource.js",
+    "db:migration:generate": "npm run typeorm migration:generate ./src/infra/shared/typeorm/migrations/$npm_config_name ",
+    "db:migration:run": "npm run typeorm migration:run",
+    "db:migration:revert": "npm run typeorm migration:revert"
   },
   "repository": {
     "type": "git",
@@ -36,7 +40,9 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "module-alias": "^2.2.3"
+    "module-alias": "^2.2.3",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20"
   },
   "_moduleAliases": {
     "@application": "dist/application",
