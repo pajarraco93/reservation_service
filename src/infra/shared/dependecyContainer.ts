@@ -1,8 +1,9 @@
-import { findAvailableTableUsecase } from '@application/table/usecases/findAvailable.usecase';
+import { getAvailabilityUsecase } from '@application/availavility/usecases/get.usecase';
 import { cancelReservationUsecase } from '@application/reservation/usecases/cancel.usecase';
 import { createReservationUsecase } from '@application/reservation/usecases/create.usecase';
 import { getReservationUsecase } from '@application/reservation/usecases/get.usecase';
 import { updateReservationUsecase } from '@application/reservation/usecases/update.usecase';
+import { findAvailableTableUsecase } from '@application/table/usecases/findAvailable.usecase';
 import { ReservatioInmemoryRepository } from '@infra/reservation/inmemory/repository';
 import { TableInmemoryRepository } from '@infra/table/inmemory/repository';
 
@@ -17,6 +18,7 @@ const createReservation = createReservationUsecase({
 const getReservation = getReservationUsecase({ reservationRepository });
 const cancelReservation = cancelReservationUsecase({ reservationRepository });
 const updateReservation = updateReservationUsecase({ reservationRepository });
+const getAvailability = getAvailabilityUsecase({ reservationRepository, tableRepository });
 
 export const container = {
   repositories: {
@@ -28,6 +30,7 @@ export const container = {
     getReservation,
     updateReservation,
     cancelReservation,
-    findAvailableTable
+    findAvailableTable,
+    getAvailability
   }
 };

@@ -4,9 +4,10 @@ import { Table } from '@domain/table/model';
 import { jest } from '@jest/globals';
 
 import { FindAvailableTableUsecase } from '../../table/usecases/findAvailable.port';
+import { RESERVATION_DURATION } from '../constants';
 
 import { CreateReservationUsecase } from './create.port';
-import { createReservationUsecase, RESERVATION_DURATION } from './create.usecase';
+import { createReservationUsecase } from './create.usecase';
 
 const mockFindAvailableTableUsecase = {
   execute: jest.fn()
