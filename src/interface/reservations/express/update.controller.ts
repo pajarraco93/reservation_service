@@ -13,7 +13,7 @@ export const updateReservationController = async (req: Request, res: Response): 
 
     const reservation = container.usecases.updateReservation.execute({ updatedReservation });
 
-    res.status(201).send(reservation);
+    res.status(200).send(reservation);
   } catch (error) {
     if (error instanceof ReservationServiceError) {
       res.status(error.statusCode).json({ error: error.message });

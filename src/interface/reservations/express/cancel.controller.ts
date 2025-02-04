@@ -9,7 +9,7 @@ export const cancelReservationController = async (req: Request, res: Response): 
 
     container.usecases.updateWaitList.execute({ datetime: reservation.startsAt });
 
-    res.status(201).send(reservation);
+    res.status(204).send(reservation);
   } catch (error) {
     if (error instanceof ReservationServiceError) {
       res.status(error.statusCode).json({ error: error.message });
