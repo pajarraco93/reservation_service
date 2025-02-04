@@ -5,6 +5,7 @@ export interface ReservationRepository {
   getReservation: (reservationId: string) => Reservation | null;
   getReservationsForDayWithStatus: (date: Date, status?: ReservationStatus) => Reservation[];
   getReservedInTime: (startsAt: Date, endsAt: Date) => Reservation[];
+  getReservedByDate: (datetime: Date) => Reservation[];
   updateReservation: (
     reservationId: string,
     reservationUpdated: Partial<Reservation>
