@@ -8,6 +8,11 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     reservations = [...reservations, reservation];
   };
 
+  const getReservation = (reservationId: string): Reservation | null => {
+    const reservation = reservations.find((reservations) => reservations.id === reservationId);
+    return reservation ? reservation : null;
+  };
+
   const getReservationsInTime = (startsAt: Date, endsAt: Date): Reservation[] => {
     return reservations.filter(
       (reservation) =>
@@ -32,6 +37,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
 
   return {
     createReservation,
+    getReservation,
     getReservationsInTime,
     resetReservations
   };
