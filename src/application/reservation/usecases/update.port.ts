@@ -5,5 +5,5 @@ export interface UpdateReservationUsecaseInput {
 }
 
 export interface UpdateReservationUsecase {
-  execute(input: UpdateReservationUsecaseInput): boolean;
+  execute(input: UpdateReservationUsecaseInput): Reservation;
 }

@@ -38,28 +38,26 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
-  const updateReservation = (reservationUpdated: Partial<Reservation>): boolean => {
-    const index = reservations.findIndex((reservation) => reservation.id === reservationUpdated.id);
+  const updateReservation = (
+    reservationId: string,
+    reservationUpdated: Partial<Reservation>
+  ): Reservation | null => {
+    const index = reservations.findIndex((reservation) => reservation.id === reservationId);
     if (index === -1) {
-      return false;
+      return null;
     }
+
+    const { customerName, customerEmail, status, table } = reservationUpdated;
 
     reservations[index] = {
       ...reservations[index],
-      customerName: reservationUpdated.customerName!,
-      customerEmail: reservationUpdated.customerEmail!
+      ...(customerName && { customerName }),
+      ...(customerEmail && { customerEmail }),
+      ...(status && { status }),
+      ...(table && { table })
     };
-    return true;
-  };
 
-  const cancelReservation = (reservationId: string): boolean => {
-    const index = reservations.findIndex((reservation) => reservation.id === reservationId);
-    if (index === -1) {
-      return false;
-    }
-
-    reservations[index] = { ...reservations[index], status: ReservationStatus.CANCELLED };
-    return true;
+    return reservations[index];
   };
 
   const resetReservations = (): void => {
@@ -81,7 +79,6 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     getReservationsForDayWithStatus,
     getReservationsInTime,
     updateReservation,
-    cancelReservation,
     resetReservations
   };
 };
