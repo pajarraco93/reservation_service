@@ -101,36 +101,13 @@ describe('ReservatioInmemoryRepository', () => {
     expect(reservations).toHaveLength(0);
   });
 
-  it('cancelReservation should return false because reservation does not exist', () => {
-    const result = repository.cancelReservation('999');
-    expect(result).toBeFalsy();
-  });
-
-  it('cancelReservation should return true and reservation should have a cancelled status', () => {
-    const reservation: Reservation = {
-      id: '1',
-      startsAt: new Date('2025-02-04T10:00:00Z'),
-      endsAt: new Date('2025-02-04T11:00:00Z'),
-      status: ReservationStatus.RESERVED,
-      table: { id: 'Table1' }
-    } as Reservation;
-
-    repository.createReservation(reservation);
-
-    const result = repository.cancelReservation(reservation.id);
-
-    const cancelled = repository.getReservation(reservation.id);
-    expect(result).toBeTruthy();
-    expect(cancelled?.status).toBe(ReservationStatus.CANCELLED);
-  });
-
   it('updateReservation should return false because reservation does not exist', () => {
     const reservation: Reservation = {
       id: '999'
     } as Reservation;
 
-    const result = repository.updateReservation(reservation);
-    expect(result).toBeFalsy();
+    const result = repository.updateReservation(reservation.id, reservation);
+    expect(result).toBeNull();
   });
 
   it('updateReservation should return true and reservation should have been updated', () => {
@@ -152,11 +129,10 @@ describe('ReservatioInmemoryRepository', () => {
 
     repository.createReservation(reservation);
 
-    const result = repository.updateReservation(reservationUpdated);
+    const result = repository.updateReservation(reservationUpdated.id, reservationUpdated);
 
-    const updated = repository.getReservation(reservation.id);
-    expect(result).toBeTruthy();
-    expect(updated?.customerName).toBe(reservationUpdated.customerName);
-    expect(updated?.customerEmail).toBe(reservationUpdated.customerEmail);
+    expect(result).toBeDefined();
+    expect(result?.customerName).toBe(reservationUpdated.customerName);
+    expect(result?.customerEmail).toBe(reservationUpdated.customerEmail);
   });
 });

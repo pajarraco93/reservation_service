@@ -1,3 +1,4 @@
+import { Reservation, ReservationStatus } from '@domain/reservation/model';
 import { ReservationRepository } from '@domain/reservation/repository.port';
 import { NotFoundError } from '@shared/errors';
 
@@ -10,8 +11,14 @@ export interface CancelReservationUsecaseProps {
 export const cancelReservationUsecase = ({
   reservationRepository
 }: CancelReservationUsecaseProps): CancelReservationUsecase => {
-  const execute = (input: CancelReservationUsecaseInput): boolean => {
-    const cancelled = reservationRepository.cancelReservation(input.reservationId);
+  const execute = (input: CancelReservationUsecaseInput): Reservation => {
+    const cancelled = reservationRepository.updateReservation(
+      input.reservationId,
+
+      {
+        status: ReservationStatus.CANCELLED
+      }
+    );
 
     if (!cancelled) {
       throw new NotFoundError(`Reservation #${input.reservationId} not found`);
