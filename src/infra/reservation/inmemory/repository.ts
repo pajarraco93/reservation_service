@@ -17,6 +17,10 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
+  const resetReservations = (): void => {
+    reservations = [];
+  };
+
   const isOverlapping = (
     startsAtA: Date,
     endsAtA: Date,
@@ -28,6 +32,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
 
   return {
     createReservation,
-    getReservationsInTime
+    getReservationsInTime,
+    resetReservations
   };
 };

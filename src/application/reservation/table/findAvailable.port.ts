@@ -6,5 +6,5 @@ export interface FindAvailableTableUsecaseInput {
 }
 
 export interface FindAvailableTableUsecase {
-  execute(input: FindAvailableTableUsecaseInput): Promise<Table | null>;
+  execute(input: FindAvailableTableUsecaseInput): Table | null;
 }

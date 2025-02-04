@@ -17,12 +17,12 @@ export const createReservationUsecase = ({
   findAvailableTableUsecase,
   reservationRepository
 }: CreateReservationUsecaseProps): CreateReservationUsecase => {
-  const execute = async (input: CreateReservationUsecaseInput): Promise<Reservation> => {
+  const execute = (input: CreateReservationUsecaseInput): Reservation => {
     const { partySize, customerName, customerEmail, datetime } = input;
 
     const reservationEndsAt = new Date(datetime.getTime() + RESERVATION_DURATION);
     const reservations = reservationRepository.getReservationsInTime(datetime, reservationEndsAt);
-    const table = await findAvailableTableUsecase.execute({
+    const table = findAvailableTableUsecase.execute({
       occupiedTableIds: reservations.map((reservation) => reservation.table!.id),
       partySize
     });

@@ -10,7 +10,7 @@ export interface CreateReservationUsecaseProps {
 export const findAvailableTableUsecase = ({
   tableRepository
 }: CreateReservationUsecaseProps): FindAvailableTableUsecase => {
-  const execute = async (input: FindAvailableTableUsecaseInput): Promise<Table | null> => {
+  const execute = (input: FindAvailableTableUsecaseInput): Table | null => {
     const { partySize, occupiedTableIds } = input;
     const tables = tableRepository
       .getTables()

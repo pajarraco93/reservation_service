@@ -1,12 +1,17 @@
 import { Reservation, ReservationStatus } from '@domain/reservation/model';
+import { ReservationRepository } from '@domain/reservation/repository.port';
+
 import { ReservatioInmemoryRepository } from './repository';
-import { Table } from '@domain/table/model';
 
 describe('ReservatioInmemoryRepository', () => {
-  let repository: ReturnType<typeof ReservatioInmemoryRepository>;
+  let repository: ReservationRepository;
 
   beforeEach(() => {
     repository = ReservatioInmemoryRepository();
+  });
+
+  afterEach(() => {
+    repository.resetReservations();
   });
 
   it('createReservation should create a reservation', () => {
@@ -15,7 +20,7 @@ describe('ReservatioInmemoryRepository', () => {
       startsAt: new Date('2025-02-04T12:00:00Z'),
       endsAt: new Date('2025-02-04T14:00:00Z'),
       status: ReservationStatus.RESERVED,
-      table: {id: 'Table1'}
+      table: { id: 'Table1' }
     } as Reservation;
 
     repository.createReservation(reservation);
@@ -35,7 +40,7 @@ describe('ReservatioInmemoryRepository', () => {
       startsAt: new Date('2025-02-04T12:00:00Z'),
       endsAt: new Date('2025-02-04T14:00:00Z'),
       status: ReservationStatus.RESERVED,
-      table: {id: 'Table1'}
+      table: { id: 'Table1' }
     } as Reservation;
 
     const reservation2: Reservation = {
@@ -43,7 +48,7 @@ describe('ReservatioInmemoryRepository', () => {
       startsAt: new Date('2025-02-04T15:00:00Z'),
       endsAt: new Date('2025-02-04T16:00:00Z'),
       status: ReservationStatus.RESERVED,
-      table: {id: 'Table2'}
+      table: { id: 'Table2' }
     } as Reservation;
 
     repository.createReservation(reservation1);
@@ -64,7 +69,7 @@ describe('ReservatioInmemoryRepository', () => {
       startsAt: new Date('2025-02-04T12:00:00Z'),
       endsAt: new Date('2025-02-04T14:00:00Z'),
       status: ReservationStatus.CANCELLED,
-      table: {id: 'Table2'}
+      table: { id: 'Table2' }
     } as Reservation;
 
     repository.createReservation(reservation);
@@ -83,7 +88,7 @@ describe('ReservatioInmemoryRepository', () => {
       startsAt: new Date('2025-02-04T10:00:00Z'),
       endsAt: new Date('2025-02-04T11:00:00Z'),
       status: ReservationStatus.RESERVED,
-      table: {id: 'Table1'}
+      table: { id: 'Table1' }
     } as Reservation;
 
     repository.createReservation(reservation);

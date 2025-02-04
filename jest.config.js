@@ -1,4 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
+import { pathsToModuleNameMapper } from 'ts-jest';
+
+import tsconfig from './tsconfig.json' with { type: "json" };
 
 export default {
   testEnvironment: "node",
@@ -19,6 +22,7 @@ export default {
   coveragePathIgnorePatterns: [
     '<rootDir>/main.ts',
   ],
+  moduleNameMapper: pathsToModuleNameMapper(tsconfig.compilerOptions.paths, { prefix: '<rootDir>/src/' }),
   transform: {
     "^.+.tsx?$": ["ts-jest",{}],
   },
