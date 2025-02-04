@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
+import { cancelReservationController } from './cancel.controller';
 import { createReservationController } from './create.controller';
 import { getReservationController } from './get.controller';
-import { cancelReservationController } from './cancel.controller';
 
 const router = Router();
 
