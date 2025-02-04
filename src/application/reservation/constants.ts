@@ -1,0 +1,1 @@
+export const RESERVATION_DURATION = 45 * 60 * 1000;

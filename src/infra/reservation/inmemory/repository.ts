@@ -13,6 +13,22 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     return reservation ? reservation : null;
   };
 
+  const getReservationsForDayWithStatus = (
+    date: Date,
+    status?: ReservationStatus
+  ): Reservation[] => {
+    const startOfDay = new Date(date.toISOString().split('T')[0]);
+    const endOfDay = new Date(startOfDay);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    return reservations.filter(
+      (reservation) =>
+        reservation.startsAt >= startOfDay &&
+        reservation.startsAt <= endOfDay &&
+        (status ? reservation.status === status : true)
+    );
+  };
+
   const getReservationsInTime = (startsAt: Date, endsAt: Date): Reservation[] => {
     return reservations.filter(
       (reservation) =>
@@ -62,6 +78,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
   return {
     createReservation,
     getReservation,
+    getReservationsForDayWithStatus,
     getReservationsInTime,
     updateReservation,
     cancelReservation,

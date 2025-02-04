@@ -1,3 +1,4 @@
+import { router as availabilityRouter } from '@interface/availability/express/router';
 import { router as reservationRouter } from '@interface/reservations/express/router';
 import { APP_NAME } from '@shared/env';
 import express from 'express';
@@ -10,6 +11,7 @@ const createServer = (port: string | number) => {
   application.use(express.json());
 
   application.use('/reservation', reservationRouter);
+  application.use('/availability', availabilityRouter);
 
   const close = (): Promise<void> => {
     return new Promise((resolve) => {

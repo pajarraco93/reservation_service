@@ -3,6 +3,7 @@ import { ReservationRepository } from '@domain/reservation/repository.port';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FindAvailableTableUsecase } from '../../table/usecases/findAvailable.port';
+import { RESERVATION_DURATION } from '../constants';
 
 import { CreateReservationUsecase, CreateReservationUsecaseInput } from './create.port';
 
@@ -10,8 +11,6 @@ export interface CreateReservationUsecaseProps {
   findAvailableTableUsecase: FindAvailableTableUsecase;
   reservationRepository: ReservationRepository;
 }
-
-export const RESERVATION_DURATION = 45 * 60 * 1000;
 
 export const createReservationUsecase = ({
   findAvailableTableUsecase,

@@ -10,7 +10,11 @@ const tables: Table[] = [
 export const TableInmemoryRepository = (): TableRepository => {
   const getTables = () => tables;
 
+  const getTablesWithCapacity = (partySize: number) =>
+    tables.filter((table) => table.capacity >= partySize);
+
   return {
-    getTables
+    getTables,
+    getTablesWithCapacity
   };
 };
