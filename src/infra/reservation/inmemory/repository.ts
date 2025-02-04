@@ -22,8 +22,22 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
+  const updateReservation = (reservationUpdated: Partial<Reservation>): boolean => {
+    const index = reservations.findIndex((reservation) => reservation.id === reservationUpdated.id);
+    if (index === -1) {
+      return false;
+    }
+
+    reservations[index] = {
+      ...reservations[index],
+      customerName: reservationUpdated.customerName!,
+      customerEmail: reservationUpdated.customerEmail!
+    };
+    return true;
+  };
+
   const cancelReservation = (reservationId: string): boolean => {
-    const index = reservations.findIndex((r) => r.id === reservationId);
+    const index = reservations.findIndex((reservation) => reservation.id === reservationId);
     if (index === -1) {
       return false;
     }
@@ -49,6 +63,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     createReservation,
     getReservation,
     getReservationsInTime,
+    updateReservation,
     cancelReservation,
     resetReservations
   };
