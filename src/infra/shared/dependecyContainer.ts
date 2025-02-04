@@ -1,5 +1,6 @@
 import { findAvailableTableUsecase } from '@application/reservation/table/findAvailable.usecase';
 import { createReservationUsecase } from '@application/reservation/usecases/create.usecase';
+import { getReservationUsecase } from '@application/reservation/usecases/get.usecase';
 import { ReservatioInmemoryRepository } from '@infra/reservation/inmemory/repository';
 import { TableInmemoryRepository } from '@infra/table/inmemory/repository';
 
@@ -11,6 +12,7 @@ const createReservation = createReservationUsecase({
   findAvailableTableUsecase: findAvailableTable,
   reservationRepository
 });
+const getReservation = getReservationUsecase({ reservationRepository });
 
 export const container = {
   repositories: {
@@ -19,6 +21,7 @@ export const container = {
   },
   usecases: {
     createReservation,
+    getReservation,
     findAvailableTable
   }
 };
