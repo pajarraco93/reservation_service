@@ -1,4 +1,4 @@
-import { findAvailableTableUsecase } from '@application/reservation/table/findAvailable.usecase';
+import { findAvailableTableUsecase } from '@application/table/usecases/findAvailable.usecase';
 import { cancelReservationUsecase } from '@application/reservation/usecases/cancel.usecase';
 import { createReservationUsecase } from '@application/reservation/usecases/create.usecase';
 import { getReservationUsecase } from '@application/reservation/usecases/get.usecase';

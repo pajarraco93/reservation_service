@@ -2,7 +2,7 @@ import { Reservation, ReservationStatus } from '@domain/reservation/model';
 import { ReservationRepository } from '@domain/reservation/repository.port';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FindAvailableTableUsecase } from '../table/findAvailable.port';
+import { FindAvailableTableUsecase } from '../../table/usecases/findAvailable.port';
 
 import { CreateReservationUsecase, CreateReservationUsecaseInput } from './create.port';
 

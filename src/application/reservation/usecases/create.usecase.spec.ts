@@ -3,7 +3,7 @@ import { ReservationRepository } from '@domain/reservation/repository.port';
 import { Table } from '@domain/table/model';
 import { jest } from '@jest/globals';
 
-import { FindAvailableTableUsecase } from '../table/findAvailable.port';
+import { FindAvailableTableUsecase } from '../../table/usecases/findAvailable.port';
 
 import { CreateReservationUsecase } from './create.port';
 import { createReservationUsecase, RESERVATION_DURATION } from './create.usecase';
