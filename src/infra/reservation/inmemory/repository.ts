@@ -38,6 +38,21 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
+  const getReservedByDate = (datetime: Date): Reservation[] => {
+    const normalizedDate = new Date(datetime);
+    normalizedDate.setSeconds(0, 0);
+    return reservations.filter((reservation) => {
+      const normalizedReservationDate = new Date(reservation.startsAt);
+      normalizedReservationDate.setSeconds(0, 0);
+
+      return (
+        normalizedReservationDate.getTime() === normalizedDate.getTime() &&
+        reservation.status === ReservationStatus.RESERVED &&
+        reservation.table
+      );
+    });
+  };
+
   const updateReservation = (
     reservationId: string,
     reservationUpdated: Partial<Reservation>
@@ -78,6 +93,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     getReservation,
     getReservationsForDayWithStatus,
     getReservedInTime,
+    getReservedByDate,
     updateReservation,
     resetReservations
   };

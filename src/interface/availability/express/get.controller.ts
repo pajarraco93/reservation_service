@@ -11,7 +11,7 @@ export const getAvailabiltyController = async (req: Request, res: Response): Pro
       partySize: Number(partySize)
     });
 
-    res.status(200).send(slots);
+    res.status(200).send(slots.map((slot) => slot.toLocaleString()));
   } catch (error) {
     if (error instanceof ReservationServiceError) {
       res.status(error.statusCode).json({ error: error.message });
