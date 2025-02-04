@@ -25,7 +25,7 @@ describe('ReservatioInmemoryRepository', () => {
 
     repository.createReservation(reservation);
 
-    const reservations = repository.getReservationsInTime(
+    const reservations = repository.getReservedInTime(
       new Date('2025-02-04T12:30:00Z'),
       new Date('2025-02-04T13:30:00Z')
     );
@@ -34,7 +34,7 @@ describe('ReservatioInmemoryRepository', () => {
     expect(reservations[0]).toEqual(reservation);
   });
 
-  it('getReservationsInTime should return only reservations that overlap', () => {
+  it('getReservedInTime should return only reservations that overlap', () => {
     const reservation1: Reservation = {
       id: '1',
       startsAt: new Date('2025-02-04T12:00:00Z'),
@@ -54,7 +54,7 @@ describe('ReservatioInmemoryRepository', () => {
     repository.createReservation(reservation1);
     repository.createReservation(reservation2);
 
-    const overlappingReservations = repository.getReservationsInTime(
+    const overlappingReservations = repository.getReservedInTime(
       new Date('2025-02-04T12:30:00Z'),
       new Date('2025-02-04T13:30:00Z')
     );
@@ -63,7 +63,7 @@ describe('ReservatioInmemoryRepository', () => {
     expect(overlappingReservations[0].id).toBe(reservation1.id);
   });
 
-  it('getReservationsInTime should not return reservations with status different from RESERVED', () => {
+  it('getReservedInTime should not return reservations with status different from RESERVED', () => {
     const reservation: Reservation = {
       id: '1',
       startsAt: new Date('2025-02-04T12:00:00Z'),
@@ -74,7 +74,7 @@ describe('ReservatioInmemoryRepository', () => {
 
     repository.createReservation(reservation);
 
-    const reservations = repository.getReservationsInTime(
+    const reservations = repository.getReservedInTime(
       new Date('2025-02-04T12:30:00Z'),
       new Date('2025-02-04T13:30:00Z')
     );
@@ -82,7 +82,7 @@ describe('ReservatioInmemoryRepository', () => {
     expect(reservations).toHaveLength(0);
   });
 
-  it('getReservationsInTime should not return reservations if they do not overlap', () => {
+  it('getReservedInTime should not return reservations if they do not overlap', () => {
     const reservation: Reservation = {
       id: '1',
       startsAt: new Date('2025-02-04T10:00:00Z'),
@@ -93,7 +93,7 @@ describe('ReservatioInmemoryRepository', () => {
 
     repository.createReservation(reservation);
 
-    const reservations = repository.getReservationsInTime(
+    const reservations = repository.getReservedInTime(
       new Date('2025-02-04T12:00:00Z'),
       new Date('2025-02-04T13:00:00Z')
     );

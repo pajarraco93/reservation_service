@@ -20,7 +20,7 @@ export const createReservationUsecase = ({
     const { partySize, customerName, customerEmail, datetime } = input;
 
     const reservationEndsAt = new Date(datetime.getTime() + RESERVATION_DURATION);
-    const reservations = reservationRepository.getReservationsInTime(datetime, reservationEndsAt);
+    const reservations = reservationRepository.getReservedInTime(datetime, reservationEndsAt);
     const table = findAvailableTableUsecase.execute({
       occupiedTableIds: reservations.map((reservation) => reservation.table!.id),
       partySize

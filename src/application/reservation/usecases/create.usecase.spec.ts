@@ -14,7 +14,7 @@ const mockFindAvailableTableUsecase = {
 };
 
 const mockReservationRepository = {
-  getReservationsInTime: jest.fn(),
+  getReservedInTime: jest.fn(),
   createReservation: jest.fn()
 };
 
@@ -39,7 +39,7 @@ describe('createReservationUsecase', () => {
       datetime
     };
 
-    mockReservationRepository.getReservationsInTime.mockReturnValue([]);
+    mockReservationRepository.getReservedInTime.mockReturnValue([]);
     mockFindAvailableTableUsecase.execute.mockReturnValue(table);
 
     const reservation = await usecase.execute(input);
@@ -65,7 +65,7 @@ describe('createReservationUsecase', () => {
       datetime
     };
 
-    mockReservationRepository.getReservationsInTime.mockReturnValue([]);
+    mockReservationRepository.getReservedInTime.mockReturnValue([]);
     mockFindAvailableTableUsecase.execute.mockReturnValue(null);
 
     const reservation = await usecase.execute(input);
