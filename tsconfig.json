@@ -19,6 +19,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
     "paths": {
       "@application/*": ["./application/*"],
       "@domain/*": ["./domain/*"],
