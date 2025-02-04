@@ -1,5 +1,6 @@
 import { CreateReservationUsecaseInput } from '@application/reservation/usecases/create.port';
 import { container } from '@infra/shared/dependecyContainer';
+import { ReservationServiceError } from '@shared/errors';
 import { Request, Response } from 'express';
 
 export const createReservationController = async (req: Request, res: Response): Promise<void> => {
@@ -10,11 +11,12 @@ export const createReservationController = async (req: Request, res: Response): 
       inputParams.datetime = new Date(inputParams.datetime);
     }
 
-    const reservation = await container.usecases.createReservation.execute(inputParams);
+    const reservation = container.usecases.createReservation.execute(inputParams);
 
-    res.status(201).json({ reservation });
+    res.status(201).json(reservation);
   } catch (error) {
-    console.error('Error creating reservation:', error);
-    res.status(400).json({ error: 'Invalid request' });
+    if (error instanceof ReservationServiceError) {
+      res.status(error.statusCode).json({ error: error.message });
+    }
   }
 };
