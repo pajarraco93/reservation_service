@@ -22,6 +22,16 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
+  const cancelReservation = (reservationId: string): boolean => {
+    const index = reservations.findIndex((r) => r.id === reservationId);
+    if (index === -1) {
+      return false;
+    }
+
+    reservations[index] = { ...reservations[index], status: ReservationStatus.CANCELLED };
+    return true;
+  };
+
   const resetReservations = (): void => {
     reservations = [];
   };
@@ -39,6 +49,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     createReservation,
     getReservation,
     getReservationsInTime,
+    cancelReservation,
     resetReservations
   };
 };
