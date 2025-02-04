@@ -1,7 +1,7 @@
 import { Reservation } from '@domain/reservation/model';
 
 export interface UpdateReservationUsecaseInput {
-  reservationUpdated: Reservation;
+  updatedReservation: Partial<Reservation>;
 }
 
 export interface UpdateReservationUsecase {

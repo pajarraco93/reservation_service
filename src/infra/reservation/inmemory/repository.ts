@@ -22,7 +22,7 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
     );
   };
 
-  const updateReservation = (reservationUpdated: Reservation): boolean => {
+  const updateReservation = (reservationUpdated: Partial<Reservation>): boolean => {
     const index = reservations.findIndex((reservation) => reservation.id === reservationUpdated.id);
     if (index === -1) {
       return false;
@@ -30,8 +30,8 @@ export const ReservatioInmemoryRepository = (): ReservationRepository => {
 
     reservations[index] = {
       ...reservations[index],
-      customerName: reservationUpdated.customerName,
-      customerEmail: reservationUpdated.customerEmail
+      customerName: reservationUpdated.customerName!,
+      customerEmail: reservationUpdated.customerEmail!
     };
     return true;
   };

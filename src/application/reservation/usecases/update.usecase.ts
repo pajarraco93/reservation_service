@@ -11,10 +11,10 @@ export const updateReservationUsecase = ({
   reservationRepository
 }: UpdateReservationUsecaseProps): UpdateReservationUsecase => {
   const execute = (input: UpdateReservationUsecaseInput): boolean => {
-    const updated = reservationRepository.updateReservation(input.reservationUpdated);
+    const updated = reservationRepository.updateReservation(input.updatedReservation);
 
     if (!updated) {
-      throw new NotFoundError(`Reservation #${input.reservationUpdated.id} not found`);
+      throw new NotFoundError(`Reservation #${input.updatedReservation.id} not found`);
     }
 
     return updated;
