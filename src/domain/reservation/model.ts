@@ -3,7 +3,7 @@ import { Table } from '../table/model';
 export enum ReservationStatus {
   RESERVED = 'reserved',
   WAITING = 'waiting',
-  CANCELLED = 'canceller'
+  CANCELLED = 'cancelled'
 }
 
 export interface Reservation {
